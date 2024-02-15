@@ -1,6 +1,4 @@
-markdown
-
-# 프로젝트 이름
+# E commerce
 
 ## 디렉토리 구조
 
