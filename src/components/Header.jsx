@@ -2,24 +2,19 @@ import { Link, useNavigate } from 'react-router-dom';
 import { RiShoppingCartLine } from 'react-icons/ri';
 import { login, logout, onUserStateChange } from '../api/firebase';
 import { useEffect, useState } from 'react';
+import User from './User';
+import { IoIosLogIn } from 'react-icons/io';
+import { IoIosLogOut } from 'react-icons/io';
+
+import { GrUserAdmin } from 'react-icons/gr';
 
 export default function Header() {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    onUserStateChange((user) => {
-      setUser(user);
-    });
+    onUserStateChange(setUser);
   }, []);
-
-  const handleLogin = () => {
-    login().then(setUser);
-  };
-
-  const handleLogout = () => {
-    logout().then(setUser);
-  };
 
   return (
     <header className='w-full flex justify-between items-center p-4 mb-4 text-2xl border-b border-gray-300'>
@@ -29,30 +24,33 @@ export default function Header() {
       </Link>
 
       <nav className='flex items-center gap-4 font-semibold'>
-        <div className='relative mr-4 flex justify-center items-center'>
-          <p className='bg-red-500 h-5 w-5 rounded-full text-center text-sm font-bold absolute top-0.5 left-3 opacity-80'>
-            1
-          </p>
-          <RiShoppingCartLine
-            className='text-2xl hover:opacity-80 hover:cursor-pointer mt-2'
-            onClick={() => navigate('/cart')}
-          />
-        </div>
-        {user ? (
-          <button
-            className='font-bold px-4 py-1 bg-gray-500 rounded-md flex justify-center items-center text-gray-50 hover:opacity-80'
-            onClick={handleLogout}
-          >
-            Log out
-          </button>
-        ) : (
-          <button
-            className='font-bold px-4 py-1 bg-gray-500 rounded-md flex justify-center items-center text-gray-50 hover:opacity-80'
-            onClick={handleLogin}
-          >
-            Log in
-          </button>
+        <Link to='/all-items' className='hover:opacity-60'>
+          <span>All Products</span>
+        </Link>
+
+        <Link to='/' className='hover:opacity-60'>
+          <GrUserAdmin />
+        </Link>
+
+        {user && (
+          <div className='relative mr-4 flex justify-center items-center'>
+            <p className='bg-red-500 h-5 w-5 rounded-full text-center text-sm font-bold absolute -top-1.5 left-3 opacity-80'>
+              1
+            </p>
+            <RiShoppingCartLine
+              className='text-2xl hover:opacity-80 hover:cursor-pointer'
+              onClick={() => navigate('/cart')}
+            />
+          </div>
         )}
+
+        {user && <User user={user} />}
+        <button
+          onClick={user ? () => logout() : () => login()}
+          className='hover:opacity-60'
+        >
+          {user ? <IoIosLogOut /> : <IoIosLogIn />}
+        </button>
       </nav>
     </header>
   );

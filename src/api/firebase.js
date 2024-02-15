@@ -19,24 +19,17 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth();
 const provider = new GoogleAuthProvider();
 
-export const login = async () => {
-  return signInWithPopup(auth, provider)
-    .then((result) => {
-      const user = result.user;
-      console.log(user);
-      return user;
-    })
-    .catch(console.error);
+export const login = () => {
+  signInWithPopup(auth, provider).catch(console.error);
 };
 
-export const logout = async () => {
-  return signOut(auth)
-    .then(() => null)
-    .catch(console.error);
+export const logout = () => {
+  signOut(auth).catch(console.error);
 };
 
 // observer about user login status
 export const onUserStateChange = (callback) => {
+  // automatically being called when the login status changed
   onAuthStateChanged(auth, (user) => {
     callback(user);
   });

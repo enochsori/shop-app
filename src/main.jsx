@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App.jsx';
 import './index.css';
@@ -7,7 +6,10 @@ import Home from './pages/Home.jsx';
 import NotFound from './pages/NotFound.jsx';
 import Cart from './pages/Cart.jsx';
 import Login from './pages/Login.jsx';
+import Products from './pages/Products.jsx';
+import Category from './pages/Category.jsx';
 import ItemPage from './pages/ItemPage.jsx';
+import React from 'react';
 
 const router = createBrowserRouter([
   {
@@ -28,7 +30,15 @@ const router = createBrowserRouter([
         element: <Login />,
       },
       {
-        path: '/:item',
+        path: '/:category',
+        element: <Category />,
+      },
+      {
+        path: '/all-items',
+        element: <Products />,
+      },
+      {
+        path: '/all-items/:item',
         element: <ItemPage />,
       },
     ],
