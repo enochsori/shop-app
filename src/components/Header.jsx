@@ -1,20 +1,15 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { RiShoppingCartLine } from 'react-icons/ri';
-import { login, logout, onUserStateChange } from '../api/firebase';
-import { useEffect, useState } from 'react';
 import User from './User';
 import { IoIosLogIn } from 'react-icons/io';
 import { IoIosLogOut } from 'react-icons/io';
-
 import { GrUserAdmin } from 'react-icons/gr';
+import { useAuthContext } from '../context/AuthContext';
 
 export default function Header() {
   const navigate = useNavigate();
-  const [user, setUser] = useState(null);
 
-  useEffect(() => {
-    onUserStateChange(setUser);
-  }, []);
+  const { user, login, logout } = useAuthContext();
 
   return (
     <header className='w-full flex justify-between items-center p-4 mb-4 text-2xl border-b border-gray-300'>
@@ -28,9 +23,11 @@ export default function Header() {
           <span>All Products</span>
         </Link>
 
-        <Link to='/' className='hover:opacity-60'>
-          <GrUserAdmin />
-        </Link>
+        {user && user.isAdmin && (
+          <Link to='/new-product' className='hover:opacity-60'>
+            <GrUserAdmin />
+          </Link>
+        )}
 
         {user && (
           <div className='relative mr-4 flex justify-center items-center'>

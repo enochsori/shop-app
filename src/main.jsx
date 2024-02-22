@@ -10,6 +10,8 @@ import Products from './pages/Products.jsx';
 import Category from './pages/Category.jsx';
 import ItemPage from './pages/ItemPage.jsx';
 import React from 'react';
+import NewProduct from './pages/NewProduct.jsx';
+import ProtectedRoute from './pages/ProtectedRoute.jsx';
 
 const router = createBrowserRouter([
   {
@@ -23,7 +25,11 @@ const router = createBrowserRouter([
       },
       {
         path: '/cart',
-        element: <Cart />,
+        element: (
+          <ProtectedRoute>
+            <Cart />
+          </ProtectedRoute>
+        ),
       },
       {
         path: '/login',
@@ -32,6 +38,14 @@ const router = createBrowserRouter([
       {
         path: '/:category',
         element: <Category />,
+      },
+      {
+        path: '/new-product',
+        element: (
+          <ProtectedRoute requiredAdmin={true}>
+            <NewProduct />
+          </ProtectedRoute>
+        ),
       },
       {
         path: '/all-items',

@@ -7,7 +7,7 @@ export default function CategoryCard({ url, item }) {
     <img
       src={url}
       alt=''
-      className='w-full h-80 rounded-lg hover:opacity-60 ease-in duration-200'
+      className='w-full h-80 rounded-lg hover:opacity-60 ease-in duration-200 shrink-0'
       onClick={() => navigate(`/${item}`)}
     />
   );

@@ -70,3 +70,11 @@ body {
   /* width full but has max width */
   @apply w-full max-w-screen-2xl;
 }
+
+form input,
+form select {
+  @apply p-4 border border-gray-300 rounded-md;
+}
+form button {
+  @apply p-4 bg-brand rounded-md text-white font-bold hover:opacity-80;
+}
