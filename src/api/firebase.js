@@ -9,6 +9,7 @@ import {
 } from 'firebase/auth';
 
 import { getDatabase, ref, child, get, set } from 'firebase/database';
+import { data } from 'autoprefixer';
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -57,7 +58,6 @@ const adminUser = async (user) => {
 
 export const addNewProduct = async (product, imgURL) => {
   const id = uuid();
-
   //  upload new  product into the firebase database
   set(ref(database, `products/${id}`), {
     ...product,
@@ -65,4 +65,14 @@ export const addNewProduct = async (product, imgURL) => {
     image: imgURL,
     price: parseInt(product.price),
   });
+};
+
+export const getAllProducts = async () => {
+  return get(ref(database, 'products')) //
+    .then((snapshot) => {
+      if (snapshot.exists()) {
+        return Object.values(snapshot.val());
+      }
+      return [];
+    });
 };

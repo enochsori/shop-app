@@ -18,7 +18,7 @@ export default function Header() {
         <h1 className='font-bold text-brand text-4xl'>enoch's music</h1>
       </Link>
 
-      <nav className='flex items-center gap-4 font-semibold'>
+      <nav className='flex items-center gap-6 font-semibold'>
         <Link to='/all-items' className='hover:opacity-60'>
           <span>All Products</span>
         </Link>

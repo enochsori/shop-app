@@ -78,3 +78,7 @@ form select {
 form button {
   @apply p-4 bg-brand rounded-md text-white font-bold hover:opacity-80;
 }
+
+li {
+  list-style: none;
+}

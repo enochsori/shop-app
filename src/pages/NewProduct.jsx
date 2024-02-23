@@ -34,9 +34,11 @@ export default function NewProduct() {
             setSuccess(
               `The new Product- ${data.name} is successfully registered!`
             );
+
             setTimeout(() => {
-              setSuccess(null), 4000;
-            });
+              setSuccess(null);
+            }, 4000);
+
             // reset input fields using react form hook fn
             reset();
             setFile(null);
@@ -87,7 +89,7 @@ export default function NewProduct() {
           placeholder='Description'
         />
         <input {...register('sort', { required: true })} type='text' />
-        <button className=''>
+        <button disabled={isUploading}>
           {isUploading
             ? `uploading the new product...`
             : 'Register the product'}
