@@ -8,7 +8,6 @@ import { useAuthContext } from '../context/AuthContext';
 
 export default function Header() {
   const navigate = useNavigate();
-
   const { user, login, logout } = useAuthContext();
 
   return (

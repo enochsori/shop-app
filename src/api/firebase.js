@@ -8,8 +8,7 @@ import {
   onAuthStateChanged,
 } from 'firebase/auth';
 
-import { getDatabase, ref, child, get, set } from 'firebase/database';
-import { data } from 'autoprefixer';
+import { getDatabase, ref, get, set } from 'firebase/database';
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
